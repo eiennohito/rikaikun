@@ -471,10 +471,12 @@ var rcxContent = {
 		'RT': true,
 		'RP': true
 	},
-
+	// only check style for elements
 	isInline: function(node) {
-		return this.inlineNames.hasOwnProperty(node.nodeName) || document.defaultView.getComputedStyle(node,null).getPropertyValue('display') == 'inline' ||
-		        document.defaultView.getComputedStyle(node,null).getPropertyValue('display') == 'inline-block';
+		return this.inlineNames.hasOwnProperty(node.nodeName) || 
+		(document.nodeType == Node.ELEMENT_NODE && (
+		document.defaultView.getComputedStyle(node,null).getPropertyValue('display') == 'inline' ||
+		document.defaultView.getComputedStyle(node,null).getPropertyValue('display') == 'inline-block'));
 	},
 
 	// XPath expression which evaluates to text nodes
